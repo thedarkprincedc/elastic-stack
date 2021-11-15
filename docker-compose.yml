@@ -2,18 +2,18 @@ version: "3"
 
 services:
   elasticsearch:
-    image: elasticsearch:7.11.1
+    image: elasticsearch:${ELKSTACK_VERSION}
     environment:
       - discovery.type=single-node
     volumes:
-      - ./elasticsearch_data/:/usr/share/elasticsearch/data
+      - data01/:/usr/share/elasticsearch/data
     mem_limit: "1g"
 
   redis-cache:
     image: redis:6.2
 
   logstash-agent:
-    image: logstash:7.11.1
+    image: logstash:${ELKSTACK_VERSION}
     volumes:
       - ./logstash-agent:/etc/logstash
     command: logstash -f /etc/logstash/logstash.conf
@@ -23,7 +23,7 @@ services:
       - "127.0.0.1:12201:12201/udp"
 
   logstash-central:
-    image: logstash:7.11.1
+    image: logstash:${ELKSTACK_VERSION}
     volumes:
       - ./logstash-central:/etc/logstash
     command: logstash -f /etc/logstash/logstash.conf
@@ -31,7 +31,7 @@ services:
       - elasticsearch
 
   kibana:
-    image: kibana:7.11.1
+    image: kibana:${ELKSTACK_VERSION}
     ports:
       - 5601:5601
     environment:
@@ -45,3 +45,7 @@ services:
       options:
         gelf-address: udp://127.0.0.1:12201 # Logstash UDP input port
         tag: kibana
+
+volumes:
+  data01:
+    driver: local
