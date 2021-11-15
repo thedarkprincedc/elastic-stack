@@ -7,7 +7,7 @@ trigger:
 - master
 
 variables:
-  - group: ElasticSearch_GithubSync
+  - group: ElasticStackGithubSync
 
 pool:
   vmImage: ubuntu-latest
