@@ -9,6 +9,8 @@ trigger:
 variables:
   - name: GITHUB_PAT
     value: mkomkm:omomkm
+  - name: REPO_NAME
+    value: njononjonjnon
 pool:
   vmImage: ubuntu-latest
 
