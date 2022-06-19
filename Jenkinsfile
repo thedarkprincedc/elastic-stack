@@ -4,6 +4,7 @@ pipeline {
         stage('Build') { 
             steps {
                 echo "builder" 
+                echo "mkedr"
             }
         }
         stage('Test') { 
